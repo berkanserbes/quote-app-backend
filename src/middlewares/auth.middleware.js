@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const ResponseModel = require("../models/base-models/ResponseModel");
 
 const authMiddleware = (req, res, next) => {
   try {
