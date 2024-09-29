@@ -1,5 +1,4 @@
 const { Schema, Query, default: mongoose } = require("mongoose");
-const Categories = require("../utils/constants/categories");
 
 const quoteSchema = new Schema(
   {
@@ -18,8 +17,8 @@ const quoteSchema = new Schema(
       default: "Unknown",
     },
     category: {
-      type: String,
-      enum: Object.values(Categories),
+      type: Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
       trim: true,
     },

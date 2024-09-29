@@ -1,14 +1,17 @@
 require("dotenv").config();
 
 const express = require("express");
+const app = express();
 
 const connectDb = require("./config/db.config");
 const authMiddleware = require("./middlewares/auth.middleware");
-const authRoute = require("./routes/auth.route");
 
-const app = express();
+const authRoute = require("./routes/auth.route");
+const categoryRoute = require("./routes/category.route");
 
 app.use(express.json());
+
+app.use("/category", categoryRoute);
 
 app.use("/", authRoute);
 app.use(authMiddleware);
