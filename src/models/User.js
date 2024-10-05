@@ -23,11 +23,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      default: "",
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
     },
+    favoriteQuotes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Quote",
+      },
+    ],
     fullName: {
       type: String,
       get: function () {

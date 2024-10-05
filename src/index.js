@@ -9,6 +9,7 @@ const connectDb = require("./config/db.config");
 const authMiddleware = require("./middlewares/auth.middleware");
 
 const authRoute = require("./routes/auth.route");
+const userRoute = require("./routes/user.route");
 const categoryRoute = require("./routes/category.route");
 const quoteRoute = require("./routes/quote.route");
 
@@ -17,6 +18,7 @@ app.use(express.json());
 
 app.use("/", authRoute);
 app.use(authMiddleware);
+app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/quote", quoteRoute);
 
