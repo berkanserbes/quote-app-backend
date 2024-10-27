@@ -38,18 +38,16 @@ const userSchema = new Schema(
         ref: "Quote",
       },
     ],
-    fullName: {
-      type: String,
-      get: function () {
-        return `${this.firstName} ${this.lastName}`;
-      },
-    },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// userSchema.virtual("fullName").get(function () {
-//   return `${this.firstName} ${this.lastName}`;
-// });
+userSchema.virtual("fullName").get(function () {
+  if (!this.firstName && !this.lastName) {
+    return "-";
+  }
+
+  return `${this.firstName} ${this.lastName}`;
+});
 
 module.exports = mongoose.model("User", userSchema);
