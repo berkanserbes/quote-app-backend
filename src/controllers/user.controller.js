@@ -15,6 +15,23 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findOne({ email }).select("-favoriteQuotes"); // Excluding favoriteQuotes
+    if (!user)
+      return res
+        .status(404)
+        .json(new ResponseModel(null, "User not found.", false));
+
+    return res
+      .status(200)
+      .json(new ResponseModel(user, "User retrieved successfully", true));
+  } catch (error) {
+    return res.status(500).json(new ResponseModel(null, err.message, false));
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -181,6 +198,7 @@ const removeFavoriteQuote = async (req, res) => {
 module.exports = {
   getUsers,
   getUserById,
+  getUserByEmail,
   updateUser,
   updatePassword,
   getFavoriteQuotes,

@@ -3,6 +3,7 @@ const {
   updateUser,
   getUsers,
   getUserById,
+  getUserByEmail,
   updatePassword,
   getFavoriteQuotes,
   addFavoriteQuote,
@@ -21,5 +22,6 @@ router.route("/password").put(updatePassword);
 
 router.route("/").put(updateUser).get(getUsers);
 router.route("/:id").get(getUserById);
+router.route("/email/:email").get(getUserByEmail);
 
 module.exports = router;
